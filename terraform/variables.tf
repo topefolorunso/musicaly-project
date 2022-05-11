@@ -35,13 +35,13 @@ variable "network" {
 
 variable "stg_bq_dataset" {
   description = "Storage class type for your bucket. Check official docs for more info."
-  default     = "streamify_stg"
+  default     = "musicaly_stg"
   type        = string
 }
 
 variable "prod_bq_dataset" {
   description = "Storage class type for your bucket. Check official docs for more info."
-  default     = "streamify_prod"
+  default     = "musicaly_prod"
   type        = string
 }
 

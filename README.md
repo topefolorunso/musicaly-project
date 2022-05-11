@@ -1,1 +1,1 @@
-# streamify-project
+# musicaly-project
