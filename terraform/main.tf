@@ -11,7 +11,7 @@ terraform {
 provider "google" {
   project = var.project
   region  = var.region
-  zone    = var.zone
+  //zone    = var.zone
   // credentials = file(var.credentials)  # Use this if you do not want to set env-var GOOGLE_APPLICATION_CREDENTIALS
 }
 
@@ -100,7 +100,7 @@ resource "google_dataproc_cluster" "mulitnode_spark_cluster" {
 
     gce_cluster_config {
       network = var.network
-      zone    = var.zone
+      //zone    = var.zone
 
       shielded_instance_config {
         enable_secure_boot = true
@@ -109,7 +109,7 @@ resource "google_dataproc_cluster" "mulitnode_spark_cluster" {
 
     master_config {
       num_instances = 1
-      machine_type  = "e2-standard-2"
+      machine_type  = "n2-standard-2"
       disk_config {
         boot_disk_type    = "pd-ssd"
         boot_disk_size_gb = 30
@@ -118,7 +118,7 @@ resource "google_dataproc_cluster" "mulitnode_spark_cluster" {
 
     worker_config {
       num_instances = 2
-      machine_type  = "e2-medium"
+      machine_type  = "n2-standard-1"
       disk_config {
         boot_disk_size_gb = 30
       }
