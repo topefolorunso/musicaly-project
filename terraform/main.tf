@@ -11,7 +11,7 @@ terraform {
 provider "google" {
   project = var.project
   region  = var.region
-  //zone    = var.zone
+  zone    = var.zone
   // credentials = file(var.credentials)  # Use this if you do not want to set env-var GOOGLE_APPLICATION_CREDENTIALS
 }
 
@@ -34,7 +34,7 @@ resource "google_compute_firewall" "port_rules" {
 
 resource "google_compute_instance" "kafka_vm_instance" {
   name                      = "musicaly-kafka-instance"
-  machine_type              = "e2-standard-4"
+  machine_type              = "e2-standard-2"
   tags                      = ["kafka"]
   allow_stopping_for_update = true
 
@@ -55,7 +55,7 @@ resource "google_compute_instance" "kafka_vm_instance" {
 
 resource "google_compute_instance" "airflow_vm_instance" {
   name                      = "musicaly-airflow-instance"
-  machine_type              = "e2-standard-4"
+  machine_type              = "e2-standard-2"
   allow_stopping_for_update = true
 
   boot_disk {
@@ -109,7 +109,7 @@ resource "google_dataproc_cluster" "mulitnode_spark_cluster" {
 
     master_config {
       num_instances = 1
-      machine_type  = "n2-standard-2"
+      machine_type  = "e2-medium"
       disk_config {
         boot_disk_type    = "pd-ssd"
         boot_disk_size_gb = 30
@@ -118,7 +118,7 @@ resource "google_dataproc_cluster" "mulitnode_spark_cluster" {
 
     worker_config {
       num_instances = 2
-      machine_type  = "n2-standard-1"
+      machine_type  = "e2-medium"
       disk_config {
         boot_disk_size_gb = 30
       }
