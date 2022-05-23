@@ -1,4 +1,4 @@
-cd ~/musicaly/eventsim
+cd ~/musicaly-project/eventsim
 
 echo "Building Eventsim Image..."
 docker build -t events:1.0 .
