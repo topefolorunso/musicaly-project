@@ -1,5 +1,6 @@
 variable "project" {
   description = "Your GCP Project ID"
+  default     = "streamifyproject"
   type        = string
 }
 
@@ -47,5 +48,6 @@ variable "prod_bq_dataset" {
 
 variable "bucket" {
   description = "The name of your bucket. This should be unique across GCP"
+  default     = "musicaly-data-lake"
   type        = string
 }
