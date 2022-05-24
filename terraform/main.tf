@@ -100,7 +100,7 @@ resource "google_dataproc_cluster" "mulitnode_spark_cluster" {
 
     gce_cluster_config {
       network = var.network
-      //zone    = var.zone
+      zone    = var.zone
 
       shielded_instance_config {
         enable_secure_boot = true
