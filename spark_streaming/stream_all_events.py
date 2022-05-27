@@ -15,7 +15,7 @@ AUTH_EVENTS_TOPIC = "auth_events"
 KAFKA_PORT = "9092"
 
 KAFKA_ADDRESS = os.getenv("KAFKA_ADDRESS", 'localhost')
-GCP_GCS_BUCKET = os.getenv("GCP_GCS_BUCKET", 'streamify')
+GCP_GCS_BUCKET = os.getenv("GCP_GCS_BUCKET", 'musicaly-data-lake')
 GCS_STORAGE_PATH = f'gs://{GCP_GCS_BUCKET}'
 
 # initialize a spark session
