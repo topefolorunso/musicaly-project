@@ -66,7 +66,7 @@ with DAG(
     start_date=datetime(2022,3,20),
     end_date=datetime(2022,3,20),
     catchup=True,
-    tags=['streamify']
+    tags=['musicaly']
 ) as dag:
 
     download_songs_file_task = BashOperator(

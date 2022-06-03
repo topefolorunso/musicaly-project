@@ -16,7 +16,7 @@ EVENTS = ['listen_events', 'page_view_events', 'auth_events'] # we have data com
 
 GCP_PROJECT_ID = os.environ.get('GCP_PROJECT_ID')
 GCP_GCS_BUCKET = os.environ.get('GCP_GCS_BUCKET')
-BIGQUERY_DATASET = os.environ.get('BIGQUERY_DATASET', 'streamify_stg')
+BIGQUERY_DATASET = os.environ.get('BIGQUERY_DATASET', 'musicaly_stg')
 
 EXECUTION_MONTH = '{{ logical_date.strftime("%-m") }}'
 EXECUTION_DAY = '{{ logical_date.strftime("%-d") }}'
@@ -37,15 +37,15 @@ default_args = {
 }
 
 with DAG(
-    dag_id = f'streamify_dag',
+    dag_id = f'musicaly_dag',
     default_args = default_args,
-    description = f'Hourly data pipeline to generate dims and facts for streamify',
+    description = f'Hourly data pipeline to generate dims and facts for musicaly',
     schedule_interval="5 * * * *", #At the 5th minute of every hour
     start_date=datetime(2022,3,26,18),
     catchup=False,
     max_active_runs=1,
     user_defined_macros=MACRO_VARS,
-    tags=['streamify']
+    tags=['musicaly']
 ) as dag:
     
     initate_dbt_task = BashOperator(
@@ -54,7 +54,7 @@ with DAG(
     )
 
     execute_dbt_task = BashOperator(
-        task_id = 'dbt_streamify_run',
+        task_id = 'dbt_musicaly_run',
         bash_command = 'cd /dbt && dbt deps && dbt run --profiles-dir . --target prod'
     )
 
