@@ -28,7 +28,7 @@ TABLE_NAME = 'songs'
 
 GCP_PROJECT_ID = os.environ.get('GCP_PROJECT_ID')
 GCP_GCS_BUCKET = os.environ.get('GCP_GCS_BUCKET')
-BIGQUERY_DATASET = os.environ.get('BIGQUERY_DATASET', 'streamify_stg')
+BIGQUERY_DATASET = os.environ.get('BIGQUERY_DATASET', 'musicaly_stg')
 
 
 def convert_to_parquet(csv_file, parquet_file):

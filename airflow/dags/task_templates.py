@@ -68,7 +68,7 @@ def create_empty_table(event,
             'type': 'HOUR',
             'field': 'ts'
             },
-        exists_ok = True
+    exists_ok = True
     )
 
     return task
