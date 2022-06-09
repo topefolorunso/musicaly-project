@@ -6,13 +6,13 @@ variable "project" {
 
 variable "region" {
   description = "Your project region"
-  default     = "us-central1"
+  default     = "europe-west1"
   type        = string
 }
 
 variable "zone" {
   description = "Your project zone"
-  default     = "us-central1-a"
+  default     = "europe-west1-b"
   type        = string
 }
 
