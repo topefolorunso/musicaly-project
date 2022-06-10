@@ -5,3 +5,9 @@ An end-to-end data pipeline that ingests simulated music stream data, structures
 ## Architecture
 
 Eventsim -> Kafka -> Spark Streaming -> Google Cloud Storage -> BigQuery (staging) -> dbt -> BigQuery (production) -> Google Data Studio
+
+## Data Source
+
+## Dashboard
+
+https://datastudio.google.com/embed/reporting/1085eb37-b359-4613-90e2-71e54a82ff87/page/vYvuC
