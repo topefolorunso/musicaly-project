@@ -10,6 +10,6 @@ Eventsim -> Kafka -> Spark Streaming -> Google Cloud Storage -> BigQuery (stagin
 
 ## Dashboard
 
-Live: https://datastudio.google.com/embed/reporting/1085eb37-b359-4613-90e2-71e54a82ff87/page/vYvuC
+Click [here](https://datastudio.google.com/embed/reporting/1085eb37-b359-4613-90e2-71e54a82ff87/page/vYvuC) to view latest version on Data Studio
 
 ![](https://github.com/topefolorunso/musicaly-project/blob/main/Dashboard.png)
