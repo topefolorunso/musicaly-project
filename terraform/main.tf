@@ -12,15 +12,15 @@ provider "google" {
   project = var.project
   region  = var.region
   zone    = var.zone
-  // credentials = file(var.credentials)  # Use this if you do not want to set env-var GOOGLE_APPLICATION_CREDENTIALS
+  credentials = file(var.credentials)  # Use this if you do not want to set env-var GOOGLE_APPLICATION_CREDENTIALS
 }
 
 
-resource "google_compute_firewall" "port_rules" {
+resource "google_compute_firewall" "allow_spark_on_9092" {
   project     = var.project
   name        = "kafka-broker-port"
   network     = var.network
-  description = "Opens port 9092 in the Kafka VM for Spark cluster to connect"
+  description = "Opens port 9092 on the Kafka VM for Spark cluster to connect"
 
   allow {
     protocol = "tcp"

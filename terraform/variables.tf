@@ -1,6 +1,6 @@
 variable "project" {
   description = "Your GCP Project ID"
-  default     = "streamifyproject"
+  default     = "musicaly"
   type        = string
 }
 
@@ -13,6 +13,12 @@ variable "region" {
 variable "zone" {
   description = "Your project zone"
   default     = "europe-west1-b"
+  type        = string
+}
+
+variable "credentials" {
+  description = "gcp credential file location"
+  default     = "../gcp/google_credentials.json"
   type        = string
 }
 
