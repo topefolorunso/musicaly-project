@@ -4,7 +4,7 @@ An end-to-end data pipeline that ingests simulated music stream data, structures
 
 ## background
 
-Eventsim is a top music streaming company. The management of Eventsim are working on a new feature tailored to the preferences of the users. In order to aid the development of this feature, the user preferences needed to be understood certain things about the streaming habits of users. Hence, the management came up with use cases and questions that need to be answered.
+Eventsim is a top music streaming company. The management of Eventsim are working on a new feature tailored to the preferences of the users. In order to aid the development of this feature, the developers needed to understand certain things about the streaming habits of users. Hence, they came up with use cases and questions that need to be answered.
 
 1. What is the total number of active users, heir total stream hours and their geographic distribution?
 2. What is the general gender composition of users and how do they make up the top artists?
