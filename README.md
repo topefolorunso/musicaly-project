@@ -51,8 +51,11 @@ Click [here](https://datastudio.google.com/embed/reporting/1085eb37-b359-4613-90
       ```
 2. [setup GCP account](gcp/README.md)
 3. [provision infrastructure](terraform/README.md)
-4. start and ssh into the Kafka VM
-   * set up VM
-   * [start Eventsim](eventsim/README.md)
+4. [ssh to and setup vms](vm_setup/README.md)
+5. [proceed to run](#how-to-run)
 
 ## how to run
+
+1. start up the kafka service and start streaming [here](kafka/README.md)
+2. start up the spark streaming service [here](spark_streaming/README.md)
+3. start up the airflow service [here](airflow/README.md)
