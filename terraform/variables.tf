@@ -1,24 +1,29 @@
 variable "project" {
   description = "Your GCP Project ID"
-  default     = "musicaly"
+  default     = "musicaly-project"
   type        = string
 }
 
 variable "region" {
   description = "Your project region"
-  default     = "europe-west1"
+  default     = "us-east1"
   type        = string
 }
 
 variable "zone" {
   description = "Your project zone"
-  default     = "europe-west1-b"
+  default     = "us-east1-b"
   type        = string
 }
 
-variable "credentials" {
-  description = "gcp credential file location"
-  default     = "../gcp/google_credentials.json"
+variable "network" {
+  description = "Network for your instance/cluster"
+  default     = "default"
+  type        = string
+}
+variable "vm_image" {
+  description = "Image for you VM"
+  default     = "ubuntu-os-cloud/ubuntu-2004-lts"
   type        = string
 }
 
@@ -28,32 +33,20 @@ variable "storage_class" {
   type        = string
 }
 
-variable "vm_image" {
-  description = "Image for you VM"
-  default     = "ubuntu-os-cloud/ubuntu-2004-lts"
-  type        = string
-}
-
-variable "network" {
-  description = "Network for your instance/cluster"
-  default     = "default"
-  type        = string
-}
-
-variable "stg_bq_dataset" {
+variable "staging_bigquery_dataset" {
   description = "Storage class type for your bucket. Check official docs for more info."
-  default     = "musicaly_stg"
+  default     = "musicaly_staging"
   type        = string
 }
 
-variable "prod_bq_dataset" {
+variable "production_bigquery_dataset" {
   description = "Storage class type for your bucket. Check official docs for more info."
-  default     = "musicaly_prod"
+  default     = "musicaly_production"
   type        = string
 }
 
 variable "bucket" {
   description = "The name of your bucket. This should be unique across GCP"
-  default     = "musicaly-data-lake"
+  default     = "musicaly_data_lake"
   type        = string
 }

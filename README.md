@@ -59,3 +59,5 @@ Click [here](https://datastudio.google.com/embed/reporting/1085eb37-b359-4613-90
 1. start up the kafka service and start streaming [here](kafka/README.md)
 2. start up the spark streaming service [here](spark_streaming/README.md)
 3. start up the airflow service [here](airflow/README.md)
+4. connect bigquery to Data Studio for analytics
+

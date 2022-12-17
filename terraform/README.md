@@ -12,7 +12,6 @@ After following the steps below, the following resources will be provisioned in 
 * Cloud Storage Bucket
 * Dataproc Cluster
   - 1 master node
-  - 2 worker nodes
 * BigQuery Dataset
   - Staging
   - Production
@@ -25,13 +24,12 @@ After following the steps below, the following resources will be provisioned in 
 
 2. configure the terraform [`variables.tf`](variables.tf) file
    - specify your project ID in line 3
-   - specify the path to your credentials file in line 21
    - edit other variables as you see fit
 
 3. run the following commands in your terminal
    - navigate to the terraform directory
       ```bash
-      cd <project home directory>/terraform
+      cd ~/musicaly-project/terraform
       ```
    - initiatalize terraform and download the required dependencies
 

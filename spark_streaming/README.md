@@ -11,6 +11,7 @@
    export KAFKA_ADDRESS=<KAFKA.VM.EXTERNAL.IP>
    export GCP_GCS_BUCKET=<GCS BUCKET NAME>
    ```
+   Please note that since the IP is ephemeral, you will have to repeat this every time you restart your VM or create a new shell session
 
 3. start spark streaming
    ```bash

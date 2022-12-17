@@ -12,13 +12,12 @@ provider "google" {
   project = var.project
   region  = var.region
   zone    = var.zone
-  credentials = file(var.credentials)  # Use this if you do not want to set env-var GOOGLE_APPLICATION_CREDENTIALS
 }
 
 
 resource "google_compute_firewall" "allow_spark_on_9092" {
   project     = var.project
-  name        = "kafka-broker-port"
+  name        = "allow-spark-connection"
   network     = var.network
   description = "Opens port 9092 on the Kafka VM for Spark cluster to connect"
 
@@ -28,14 +27,14 @@ resource "google_compute_firewall" "allow_spark_on_9092" {
   }
 
   source_ranges = ["0.0.0.0/0"]
-  target_tags   = ["kafka"]
+  target_tags   = ["kafka", "spark"]
 
 }
 
-resource "google_compute_instance" "kafka_vm_instance" {
-  name                      = "musicaly-kafka-instance"
-  machine_type              = "e2-medium"
-  tags                      = ["kafka"]
+resource "google_compute_instance" "kafka_vm" {
+  name                      = "musicaly-kafka-vm"
+  machine_type              = "e2-standard-2"
+  tags                      = ["kafka", "eventsim"]
   allow_stopping_for_update = true
 
   boot_disk {
@@ -53,9 +52,10 @@ resource "google_compute_instance" "kafka_vm_instance" {
 }
 
 
-resource "google_compute_instance" "airflow_vm_instance" {
-  name                      = "musicaly-airflow-instance"
-  machine_type              = "e2-medium"
+resource "google_compute_instance" "airflow_vm" {
+  name                      = "musicaly-airflow-vm"
+  machine_type              = "e2-standard-2"
+  tags                      = ["airflow", "dbt"]
   allow_stopping_for_update = true
 
   boot_disk {
@@ -72,7 +72,7 @@ resource "google_compute_instance" "airflow_vm_instance" {
   }
 }
 
-resource "google_storage_bucket" "bucket" {
+resource "google_storage_bucket" "musicaly_bucket" {
   name          = var.bucket
   location      = var.region
   force_destroy = true
@@ -90,8 +90,8 @@ resource "google_storage_bucket" "bucket" {
 }
 
 
-resource "google_dataproc_cluster" "mulitnode_spark_cluster" {
-  name   = "musicaly-multinode-spark-cluster"
+resource "google_dataproc_cluster" "musicaly_spark_cluster" {
+  name   = "musicaly-spark-cluster"
   region = var.region
 
   cluster_config {
@@ -109,17 +109,9 @@ resource "google_dataproc_cluster" "mulitnode_spark_cluster" {
 
     master_config {
       num_instances = 1
-      machine_type  = "e2-small"
+      machine_type  = "e2-standard-2"
       disk_config {
         boot_disk_type    = "pd-ssd"
-        boot_disk_size_gb = 30
-      }
-    }
-
-    worker_config {
-      num_instances = 2
-      machine_type  = "e2-small"
-      disk_config {
         boot_disk_size_gb = 30
       }
     }
@@ -136,15 +128,15 @@ resource "google_dataproc_cluster" "mulitnode_spark_cluster" {
 
 }
 
-resource "google_bigquery_dataset" "stg_dataset" {
-  dataset_id                 = var.stg_bq_dataset
+resource "google_bigquery_dataset" "staging_dataset" {
+  dataset_id                 = var.staging_bigquery_dataset
   project                    = var.project
   location                   = var.region
   delete_contents_on_destroy = true
 }
 
-resource "google_bigquery_dataset" "prod_dataset" {
-  dataset_id                 = var.prod_bq_dataset
+resource "google_bigquery_dataset" "production_dataset" {
+  dataset_id                 = var.production_bigquery_dataset
   project                    = var.project
   location                   = var.region
   delete_contents_on_destroy = true

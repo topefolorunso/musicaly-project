@@ -66,28 +66,13 @@ with DAG(
         events_data_path = f'{staging_table_name}/month={EXECUTION_MONTH}/day={EXECUTION_DAY}/hour={EXECUTION_HOUR}'
         events_schema = schema[event]
 
-        create_external_table_task = create_external_table(event,
-                                                           GCP_PROJECT_ID, 
-                                                           BIGQUERY_DATASET, 
-                                                           external_table_name, 
-                                                           GCP_GCS_BUCKET, 
-                                                           events_data_path)
+        create_external_table_task = create_external_table(event, GCP_PROJECT_ID, BIGQUERY_DATASET, external_table_name, GCP_GCS_BUCKET, events_data_path)
 
-        create_empty_table_task = create_empty_table(event,
-                                                     GCP_PROJECT_ID,
-                                                     BIGQUERY_DATASET,
-                                                     staging_table_name,
-                                                     events_schema)
+        create_empty_table_task = create_empty_table(event, GCP_PROJECT_ID, BIGQUERY_DATASET, staging_table_name, events_schema)
                                                 
-        execute_insert_query_task = insert_job(event,
-                                               insert_query,
-                                               BIGQUERY_DATASET,
-                                               GCP_PROJECT_ID)
+        execute_insert_query_task = insert_job(event, insert_query, BIGQUERY_DATASET, GCP_PROJECT_ID)
 
-        delete_external_table_task = delete_external_table(event,
-                                                           GCP_PROJECT_ID, 
-                                                           BIGQUERY_DATASET, 
-                                                           external_table_name)
+        delete_external_table_task = delete_external_table(event, GCP_PROJECT_ID, BIGQUERY_DATASET, external_table_name)
                     
         
         create_external_table_task >> \
