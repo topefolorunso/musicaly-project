@@ -38,7 +38,7 @@ First we connet to the vm instances via ssh connections. Follow the following st
 
 5. connect to the vms in separate terminal windows
    ```bash
-    ssh  kafka-vm
+    ssh kafka-vm
    ```
 
    ```bash
