@@ -13,7 +13,7 @@ docker run -itd \
   events:1.0 \
     -c "examples/example-config.json" \
     --start-time "`date +"%Y-%m-%dT%H:%M:%S"`" \
-    --to 1 \
+    --end-time "`date -d "+1 days" +"%Y-%m-%dT%H:%M:%S"`" \
     --nusers 1000000 \
     --growth-rate 10 \
     --userid 1 \
