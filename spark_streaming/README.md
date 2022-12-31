@@ -8,7 +8,7 @@
 
 2. set the necessary environment variables
    ```bash
-   export KAFKA_IP_ADDRESS=<KAFKA.VM.EXTERNAL.IP>
+   export KAFKA_EXTERNAL_IP=<KAFKA.VM.EXTERNAL.IP>
    export GCS_BUCKET_NAME=<GCS BUCKET NAME>
    ```
    Please note that since the IP is ephemeral, you will have to repeat this every time you restart your VM or create a new shell session

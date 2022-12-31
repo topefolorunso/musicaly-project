@@ -9,7 +9,7 @@ AUTH_EVENTS_TOPIC           = "auth_events"
 
 # kafka bootstrap server address
 KAFKA_PORT                  = "9092"
-KAFKA_IP_ADDRESS            = os.getenv("KAFKA_IP_ADDRESS", 'localhost')
+KAFKA_IP_ADDRESS            = os.getenv("KAFKA_EXTERNAL_IP", 'localhost')
 KAFKA_BOOTSTRAP_SERVER      = f"{KAFKA_IP_ADDRESS}:{KAFKA_PORT}"
 
 # google cloud storage bucket name and path
