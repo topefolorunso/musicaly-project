@@ -21,13 +21,13 @@ First we connet to the vm instances via ssh connections. Follow the following st
         HostName <External IP Address>
         User <username>
         IdentityFile <~/.ssh/private_keyfile>
-        LocalForward 9092 localhost:9092
+        LocalForward 9021 localhost:9021
 
     Host spark-master-node
         HostName <External IP Address Of Master Node>
         User <username>
         IdentityFile <~/.ssh/private_keyfile>
-        LocalForward 8081 localhost:8081
+        LocalForward 4040 localhost:4040
 
     Host airflow-vm
         HostName <External IP Address>
