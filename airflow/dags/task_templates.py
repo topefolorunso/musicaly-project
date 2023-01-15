@@ -1,15 +1,8 @@
-from airflow.providers.google.cloud.operators.bigquery import (BigQueryCreateExternalTableOperator, 
-                                                               BigQueryCreateEmptyTableOperator, 
-                                                               BigQueryInsertJobOperator,
-                                                               BigQueryDeleteTableOperator)
+from airflow.providers.google.cloud.operators.bigquery import BigQueryCreateExternalTableOperator, BigQueryCreateEmptyTableOperator
+from airflow.providers.google.cloud.operators.bigquery import BigQueryInsertJobOperator, BigQueryDeleteTableOperator
 
 
-def create_external_table(event,
-                          gcp_project_id, 
-                          bigquery_dataset, 
-                          external_table_name, 
-                          gcp_gcs_bucket, 
-                          events_path):
+def create_external_table(event, gcp_project_id, bigquery_dataset, external_table_name, gcp_gcs_bucket, events_path):
     """
     Create an external table using the BigQueryCreateExternalTableOperator
 
@@ -41,11 +34,7 @@ def create_external_table(event,
     return task
 
 
-def create_empty_table(event,
-                       gcp_project_id,
-                       bigquery_dataset,
-                       bigquery_table_name,
-                       events_schema):
+def create_empty_table(event, gcp_project_id, bigquery_dataset, bigquery_table_name, events_schema):
     """
     Create an empty table in Bigquery using BigQueryCreateEmptyTableOperator
 
@@ -74,11 +63,7 @@ def create_empty_table(event,
     return task
 
     
-def insert_job(event,
-               insert_query_location,
-               bigquery_dataset, 
-               gcp_project_id,
-               timeout=300000):
+def insert_job(event, insert_query_location, bigquery_dataset, gcp_project_id, timeout=300000):
     """
     Run the insert query using BigQueryInsertJobOperator
 
@@ -109,10 +94,7 @@ def insert_job(event,
     return task
 
 
-def delete_external_table(event,
-                          gcp_project_id, 
-                          bigquery_dataset, 
-                          external_table_name):
+def delete_external_table(event, gcp_project_id, bigquery_dataset, external_table_name):
 
     """
     Delete table from Big Query using BigQueryDeleteTableOperator

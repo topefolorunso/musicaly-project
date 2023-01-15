@@ -4,15 +4,12 @@ from datetime import datetime
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 
-from schema import schema
-from task_templates import (create_external_table, 
-                            create_empty_table, 
-                            insert_job, 
-                            delete_external_table)
+from schema import listen_events, auth_events, page_view_events
+from task_templates import create_external_table, create_empty_table, insert_job, delete_external_table
+
 
 
 EVENTS = ['listen_events', 'page_view_events', 'auth_events'] # we have data coming in from three events
-
 
 GCP_PROJECT_ID = os.environ.get('GCP_PROJECT_ID')
 GCP_GCS_BUCKET = os.environ.get('GCP_GCS_BUCKET')
@@ -25,20 +22,16 @@ EXECUTION_DATETIME_STR = '{{ logical_date.strftime("%m%d%H") }}'
 
 TABLE_MAP = { f"{event.upper()}_TABLE" : event for event in EVENTS}
 
-MACRO_VARS = {"GCP_PROJECT_ID":GCP_PROJECT_ID, 
-              "BIGQUERY_DATASET": BIGQUERY_DATASET, 
-              "EXECUTION_DATETIME_STR": EXECUTION_DATETIME_STR
-              }
+MACRO_VARS = {
+    "GCP_PROJECT_ID": GCP_PROJECT_ID, 
+    "BIGQUERY_DATASET": BIGQUERY_DATASET, 
+    "EXECUTION_DATETIME_STR": EXECUTION_DATETIME_STR
+    }
 
 MACRO_VARS.update(TABLE_MAP)
 
-default_args = {
-    'owner' : 'airflow'
-}
-
 with DAG(
     dag_id = f'musicaly_dag',
-    default_args = default_args,
     description = f'Hourly data pipeline to generate dims and facts for musicaly',
     schedule_interval="5 * * * *", #At the 5th minute of every hour
     start_date=datetime(2022,3,26,18),
@@ -64,7 +57,7 @@ with DAG(
         insert_query = f"{{% include 'sql/{event}.sql' %}}" #extra {} for f-strings escape
         external_table_name = f'{staging_table_name}_{EXECUTION_DATETIME_STR}'
         events_data_path = f'{staging_table_name}/month={EXECUTION_MONTH}/day={EXECUTION_DAY}/hour={EXECUTION_HOUR}'
-        events_schema = schema[event]
+        events_schema = eval(event)
 
         create_external_table_task = create_external_table(event, GCP_PROJECT_ID, BIGQUERY_DATASET, external_table_name, GCP_GCS_BUCKET, events_data_path)
         create_empty_table_task = create_empty_table(event, GCP_PROJECT_ID, BIGQUERY_DATASET, staging_table_name, events_schema)

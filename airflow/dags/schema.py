@@ -1,5 +1,7 @@
-schema = {
-    "listen_events" : [
+
+
+
+listen_events = [
         {"name": "artist", "type": "STRING", "mode": "NULLABLE"},
         {"name": "song", "type": "STRING", "mode": "NULLABLE"},
         {"name": "duration", "type": "FLOAT64", "mode": "NULLABLE"},
@@ -16,8 +18,11 @@ schema = {
         {"name": "firstName", "type": "STRING", "mode": "NULLABLE"},
         {"name": "gender", "type": "STRING", "mode": "NULLABLE"},
         {"name": "registration", "type": "INTEGER", "mode": "NULLABLE"}
-    ],
-    "page_view_events" : [
+    ]
+
+
+
+page_view_events = [
         {"name": "ts", "type": "TIMESTAMP", "mode": "NULLABLE"},
         {"name": "page", "type": "STRING", "mode": "NULLABLE"},
         {"name": "auth", "type": "STRING", "mode": "NULLABLE"},
@@ -37,8 +42,11 @@ schema = {
         {"name": "artist", "type": "STRING", "mode": "NULLABLE"},
         {"name": "song", "type": "STRING", "mode": "NULLABLE"},
         {"name": "duration", "type": "FLOAT64", "mode": "NULLABLE"}
-    ],
-    "auth_events" : [
+    ]
+
+
+
+auth_events = [
         {"name": "ts", "type": "TIMESTAMP", "mode": "NULLABLE"},
         {"name": "level", "type": "STRING", "mode": "NULLABLE"},
         {"name": "city", "type": "STRING", "mode": "NULLABLE"},
@@ -53,4 +61,6 @@ schema = {
         {"name": "registration", "type": "INTEGER", "mode": "NULLABLE"},
         {"name": "success", "type": "BOOLEAN", "mode": "NULLABLE"}
     ]
-}
+
+
+    

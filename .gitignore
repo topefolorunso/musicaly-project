@@ -4,3 +4,4 @@ terraform/
 !terraform/main.tf
 !terraform/variables.tf
 !terraform/README.md
+airflow/logs/
