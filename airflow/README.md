@@ -7,6 +7,7 @@
    ```bash
    export GCP_PROJECT_ID=<project-id>
    export GCP_GCS_BUCKET=<GCS BUCKET NAME>
+   export GOOGLE_APPLICATION_CREDENTIALS="<path/to/your/service-account-authkeys>.json"
    ```
    Please note that you will have to repeat this every time you create a new shell session
 

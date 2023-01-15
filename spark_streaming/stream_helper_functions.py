@@ -76,23 +76,24 @@ def process_stream(stream_df: DataFrame, stream_schema: StructType, topic: str) 
 
     # read only value from the incoming message and convert the contents
     # inside to the passed schema
-    stream_df = stream_df.selectExpr("CAST(value AS STRING)")
-    stream_df = stream_df.select(from_json(col("value"), stream_schema).alias("data"))
-    stream_df = stream_df.select("data.*")
+    stream_df = stream_df \
+        .selectExpr("CAST(value AS STRING)") \
+        .select(from_json(col("value"), stream_schema).alias("data")) \
+        .select("data.*")
 
     # Add month, day, hour to split the data into separate directories
     stream_df = stream_df \
-              .withColumn("ts", (col("ts")/1000).cast("timestamp")) \
-              .withColumn("year", year(col("ts"))) \
-              .withColumn("month", month(col("ts"))) \
-              .withColumn("day", dayofmonth(col("ts"))) \
-              .withColumn("hour", hour(col("ts")))
+        .withColumn("ts", (col("ts")/1000).cast("timestamp")) \
+        .withColumn("year", year(col("ts"))) \
+        .withColumn("month", month(col("ts"))) \
+        .withColumn("day", dayofmonth(col("ts"))) \
+        .withColumn("hour", hour(col("ts")))
 
     # rectify string encoding
-    if topic in ["listen_events", "page_view_events"]:
+    if topic != "auth_events":
         stream_df = stream_df \
-                .withColumn("song", string_decode("song")) \
-                .withColumn("artist", string_decode("artist")) 
+            .withColumn("song", string_decode("song")) \
+            .withColumn("artist", string_decode("artist")) 
                 
     return stream_df
 

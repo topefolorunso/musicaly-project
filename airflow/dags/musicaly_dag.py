@@ -67,17 +67,10 @@ with DAG(
         events_schema = schema[event]
 
         create_external_table_task = create_external_table(event, GCP_PROJECT_ID, BIGQUERY_DATASET, external_table_name, GCP_GCS_BUCKET, events_data_path)
-
         create_empty_table_task = create_empty_table(event, GCP_PROJECT_ID, BIGQUERY_DATASET, staging_table_name, events_schema)
-                                                
         execute_insert_query_task = insert_job(event, insert_query, BIGQUERY_DATASET, GCP_PROJECT_ID)
-
         delete_external_table_task = delete_external_table(event, GCP_PROJECT_ID, BIGQUERY_DATASET, external_table_name)
                     
         
-        create_external_table_task >> \
-        create_empty_table_task >> \
-        execute_insert_query_task >> \
-        delete_external_table_task >> \
-        initate_dbt_task >> \
-        execute_dbt_task
+        create_external_table_task >> create_empty_table_task >> execute_insert_query_task >> delete_external_table_task >> \
+        initate_dbt_task >> execute_dbt_task

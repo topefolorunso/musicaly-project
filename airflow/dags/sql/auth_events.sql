@@ -13,5 +13,6 @@ SELECT
     COALESCE(gender, 'NA') AS gender,
     COALESCE(registration, 9999999999999) AS registration,
     COALESCE(success, FALSE)
-FROM {{ BIGQUERY_DATASET }}.{{ AUTH_EVENTS_TABLE}}_{{ logical_date.strftime("%m%d%H") }} -- Creates a table name with month day and hour values appended to it
-                                                                                            -- like listen_events_032313 for 23-03-2022 13:00:00
+FROM {{ BIGQUERY_DATASET }}.{{ AUTH_EVENTS_TABLE}}_{{ logical_date.strftime("%m%d%H") }} 
+-- Creates a table name with month day and hour values appended to it
+-- like listen_events_032313 for 23-03-2022 13:00:00
