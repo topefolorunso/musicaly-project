@@ -57,7 +57,7 @@ def create_empty_table(event, gcp_project_id, bigquery_dataset, bigquery_table_n
             'type': 'HOUR',
             'field': 'ts'
             },
-    exists_ok = True
+        exists_ok = True
     )
 
     return task
